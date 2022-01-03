@@ -5,4 +5,5 @@ FaceIt is a platform for organizing CS:GO games and tournaments. They provide an
 ![Screenshot](FaceIt_Analytics_Model.png)
 
 Tech Stack:
-- Diagrams (Flowchart, Data flow Diagram) - Creately (Creately.com)
+- Diagrams (Flowchart, Questions) - Creately (Creately.com)
+- Data flow diagram - Draw.io
