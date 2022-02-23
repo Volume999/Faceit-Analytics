@@ -3,3 +3,11 @@ Keys:
   Player_id:
   Game_id:
   Region:
+
+Database:
+  postgres:
+    port:
+    username:
+    password:
+    host:
+    DatabaseName:
