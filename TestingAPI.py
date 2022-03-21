@@ -8,10 +8,10 @@ api_keys_stream = open('config.yaml', 'r')
 config = yaml.load(stream=api_keys_stream, Loader=yaml.Loader)
 faceit_api_key = config['Keys']['Faceit-API']
 
-player_id = config['Keys']['Player_id']
-game_id = config['Keys']['Game_id']
-region = config['Keys']['Region']
-match_id = config['Keys']['Match_id']
+player_id = config['Debug']['Player_id']
+game_id = config['Debug']['Game_id']
+region = config['Debug']['Region' ]
+match_id = config['Debug']['Match_id']
 
 
 def make_faceit_api_call(relative_url="", payload=None):
@@ -97,4 +97,5 @@ def get_player_statistics(player_id):
 get_player_match_history(player_id, game_id, region)
 get_match_details(match_id)
 get_match_statistics(match_id)
-get_player_statistics(player_id)
+print(get_player_statistics(player_id).json())
+print(get_player_details(player_id).json())
