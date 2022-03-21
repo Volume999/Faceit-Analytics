@@ -34,7 +34,7 @@ CREATE TABLE clients
 (
     client_id    INT GENERATED ALWAYS AS IDENTITY UNIQUE,
     CONSTRAINT clients_pk PRIMARY KEY (client_id),
-    player_id    INT          NOT NULL,
+    player_id    VARCHAR(100)          NOT NULL,
     country_id   INT,
     CONSTRAINT clients_country_id_fkey FOREIGN KEY (country_id) REFERENCES countries (country_id),
     faceit_url   VARCHAR(200) NOT NULL,
