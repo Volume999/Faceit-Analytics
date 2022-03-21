@@ -1,8 +1,5 @@
 Keys:
   Faceit-API:
-  Player_id:
-  Game_id:
-  Region:
 
 Database:
   postgres:
@@ -10,4 +7,9 @@ Database:
     username:
     password:
     host:
-    DatabaseName:
+
+Debug:
+  Player_id:
+  Game_id:
+  Region:
+  Match_id:
