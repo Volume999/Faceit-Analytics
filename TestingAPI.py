@@ -10,7 +10,7 @@ faceit_api_key = config['Keys']['Faceit-API']
 
 player_id = config['Debug']['Player_id']
 game_id = config['Debug']['Game_id']
-region = config['Debug']['Region' ]
+region = config['Debug']['Region']
 match_id = config['Debug']['Match_id']
 
 
@@ -53,8 +53,9 @@ def get_game_details(game_id):
     return response
 
 
-def get_player_match_history(player_id, game_id, from_ = "", to_ = ""):
+def get_player_match_history(player_id, game_id, from_="", to_=""):
     relative_url = f'players/{player_id}/history'
+    # One month back if not specified
     payload = {
         "game": game_id,
         "from": from_,
@@ -94,8 +95,8 @@ def get_player_statistics(player_id):
     return response
 
 
-get_player_match_history(player_id, game_id, region)
-get_match_details(match_id)
-get_match_statistics(match_id)
-print(get_player_statistics(player_id).json())
-print(get_player_details(player_id).json())
+# print(get_player_match_history(player_id, game_id, region).json())  # Match history with small details
+# print(get_match_details(match_id).json())  # Match details - Server, Maps chosen
+# print(get_match_statistics(match_id).json())  # Match statistics for players
+# print(get_player_statistics(player_id).json())  # Player statistics and statistics per map
+# print(get_player_details(player_id).json())  # Friend list

@@ -7,7 +7,9 @@ Database:
     username:
     password:
     host:
-
+  hdfs:
+    port:
+    host:
 Debug:
   Player_id:
   Game_id:
