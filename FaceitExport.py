@@ -7,7 +7,7 @@
 # 6) Error Handling
 # 7) Retries
 # 8) Testing
-
+import os
 import psycopg2
 import requests
 import yaml
@@ -19,7 +19,7 @@ from pywebhdfs.webhdfs import PyWebHdfsClient
 from datetime import datetime
 
 # Testing getting API Key from Config.yaml
-api_keys_stream = open('config.yaml', 'r')
+api_keys_stream = open(f'{os.path.abspath(os.path.dirname(__file__))}/config.yaml', 'r')
 config = yaml.load(stream=api_keys_stream, Loader=yaml.Loader)
 faceit_api_key = config['Keys']['Faceit-API']
 database_connection_details = config['Database']['postgres']
@@ -84,7 +84,7 @@ def main():
         matches = api.get_player_match_history(player_id, game_name,
                                                region_name).json()  # Match history with small details
         hdfs_client.write(
-            hdfs_path=f'data/raw/matches/{player_id}/{current_date_time.year}/{current_date_time.month}/{current_date_time.day}/{current_date_time.strftime("%H.%M.%S")}',
+            hdfs_path=f'data/raw/matches/{player_id}/{current_date_time.year}/{current_date_time.month}/{current_date_time.day}/{current_date_time.strftime("%H.%M.%S")}.json',
             data=matches,
             overwrite=True)
         update_audit_record(database_conn, database_cursor, 'true', client_download_id)
@@ -101,7 +101,7 @@ def main():
         client_download_id = create_insert_audit_record(database_conn, database_cursor, 3, client_game_region_id, None)
         player_details = api.get_player_details(player_id).json()  # Friend list
         hdfs_client.write(
-            hdfs_path=f'data/raw/player_details/{player_id}/{current_date_time.year}/{current_date_time.month}/{current_date_time.day}/{current_date_time.strftime("%H.%M.%S")}',
+            hdfs_path=f'data/raw/player_details/{player_id}/{current_date_time.year}/{current_date_time.month}/{current_date_time.day}/{current_date_time.strftime("%H.%M.%S")}.json',
             data=player_details,
             overwrite=True
         )
@@ -112,7 +112,7 @@ def main():
                                                             match['match_id'])
             match_details = api.get_match_details(match['match_id']).json()  # Match details - Server, Maps chosen
             hdfs_client.write(
-                hdfs_path=f'data/raw/match_details/{match["match_id"]}/{current_date_time.strftime("%H.%M.%S")}',
+                hdfs_path=f'data/raw/match_details/{match["match_id"]}/{current_date_time.strftime("%H.%M.%S")}.json',
                 data=match_details,
                 overwrite=True
             )
@@ -121,7 +121,7 @@ def main():
                                                             match['match_id'])
             match_statistics = api.get_match_statistics(match['match_id']).json()  # Match statistics for players
             hdfs_client.write(
-                hdfs_path=f'data/raw/match_statistics/{match["match_id"]}/{current_date_time.strftime("%H.%M.%S")}',
+                hdfs_path=f'data/raw/match_statistics/{match["match_id"]}/{current_date_time.strftime("%H.%M.%S")}.json',
                 data=match_statistics,
                 overwrite=True
             )
